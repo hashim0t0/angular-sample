@@ -8,8 +8,8 @@ import { Component, OnInit, trigger, state, style, transition, animate, HostList
     trigger('displayState', [
       state('display', style({opacity: 1})),
       state('none', style({opacity: 0})),
-      transition('none => display', animate('800ms ease-in-out')),
-      transition('display => none', animate('800ms ease-in-out'))
+      transition('none => display', animate('1000ms ease-in-out')),
+      transition('display => none', animate('1000ms ease-in-out'))
     ]
   )]
 })
@@ -20,6 +20,9 @@ export class CardComponent implements OnInit {
   // スクロールバー位置
   @Input()
   scrollPosition: number;
+  // カード写真
+  @Input()
+  public imagePath: any;
   // カード表示状態
   public displayState = 'none';
   /**
@@ -50,13 +53,14 @@ export class CardComponent implements OnInit {
       }
     // 現在位置が指定された位置未満
     } else {
-      // カードが表示されている場合
-      if (this.displayState === 'display') {
-        // 指定された分遅延させてから非表示
-        setTimeout(() => {
-          this.displayState = 'none';
-        }, this.delay);
-      }
+      this.displayState = 'none';
+      // // カードが表示されている場合
+      // if (this.displayState === 'display') {
+      //   // 指定された分遅延させてから非表示
+      //   setTimeout(() => {
+      //     this.displayState = 'none';
+      //   }, this.delay);
+      // }
     }
   }
 }
